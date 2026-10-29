@@ -214,8 +214,11 @@ on this platform.
 1. Checkout this repository and install the tools of `mise.toml`
 2. Bring `master` of the fork up to `microsoft/winget-pkgs:master` with
    `gh repo sync` (an API call, no clone)
-3. Checkout `master` of the fork into `winget-pkgs/`: depth 1, no blobs,
-   sparse to `manifests/f/Freelensapp/Freelens`
+3. `git clone` `master` of the fork into `winget-pkgs/` with `--depth 1
+   --filter=blob:none --sparse --single-branch`, then `sparse-checkout set
+   manifests/f/Freelensapp/Freelens`. `gh auth setup-git` makes gh the
+   credential helper, so the push in step 5 uses `GH_TOKEN` without writing
+   it to `.git/config`.
 4. Run `make.sh` with `manifests` linked into that checkout
 5. Commit changes if any, force-push to the branch
    `Freelensapp-Freelens-${version}` of the fork

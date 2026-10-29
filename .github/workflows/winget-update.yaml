@@ -53,16 +53,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Checkout the master branch of the fork
-        uses: actions/checkout@v7
-        with:
-          repository: ${{ env.FORK }}
-          ref: master
-          token: ${{ secrets.GH_TOKEN }}
-          path: winget-pkgs
-          fetch-depth: 1
-          filter: blob:none
-          sparse-checkout: manifests/f/Freelensapp/Freelens
+      # Only the top commit of master, without blobs, and only the manifests of
+      # Freelens in the working tree: the history and the tree of winget-pkgs
+      # are far too big to clone. gh serves as the credential helper, so the
+      # push below authenticates with GH_TOKEN and the token never lands in
+      # .git/config.
+      - name: Clone the master branch of the fork
+        run: |
+          gh auth setup-git
+          git clone --depth 1 --filter=blob:none --sparse --single-branch --branch master \
+            "https://github.com/${FORK}.git" winget-pkgs
+          git -C winget-pkgs sparse-checkout set manifests/f/Freelensapp/Freelens
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Check if version already exists
         run: |
@@ -101,6 +104,8 @@ jobs:
           new_branch: Freelensapp-Freelens-${{ env.version }}
           fetch: false
           push: origin Freelensapp-Freelens-${{ env.version }} --set-upstream --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Create pull request
         if: env.changes == 'true'
