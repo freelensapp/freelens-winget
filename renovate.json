@@ -1,14 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
-    "baseBranchPatterns: updates is the working branch of this fork; master mirrors microsoft/winget-pkgs.",
     "ignoreDeps: ubuntu runners must stay on the oldest supported version.",
     "gitIgnoredAuthors: biome-migrate.yaml commits the migrated biome.jsonc to a Renovate branch as github-actions[bot]; without this, Renovate takes that commit for a manual edit, marks the pull request as edited and stops updating it."
   ],
   "extends": ["config:recommended", ":semanticCommitsDisabled"],
   "addLabels": ["renovate"],
-  "baseBranchPatterns": ["updates"],
-  "forkProcessing": "enabled",
   "ignoreDeps": ["ubuntu"],
   "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
   "lockFileMaintenance": {
