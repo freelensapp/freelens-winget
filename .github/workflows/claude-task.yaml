@@ -157,7 +157,6 @@ jobs:
           PROMPT_INPUT: ${{ github.event.inputs.prompt || '' }}
           MODEL_INPUT: ${{ github.event.inputs.model || '' }}
 
-      # The default branch is updates; this repository has no main.
       - name: Use the latest AGENTS.md
         shell: bash
         run: |

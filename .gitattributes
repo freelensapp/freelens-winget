@@ -6,6 +6,3 @@
 
 # WinGet manifest templates require CRLF in the working tree
 template/Freelensapp* text eol=crlf
-
-# Generated WinGet manifests also require CRLF
-manifests/**/Freelensapp* text eol=crlf

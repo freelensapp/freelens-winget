@@ -315,8 +315,7 @@ jobs:
         continue-on-error: true
 
       # Fetched by URL from the base repository, so the system prompt never
-      # comes from the tree under review. The default branch is updates; this
-      # repository has no main.
+      # comes from the tree under review.
       - name: Use the latest AGENTS.md
         shell: bash
         run: |

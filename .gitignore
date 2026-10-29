@@ -4,6 +4,7 @@
 
 manifests/
 tmp/
+winget-pkgs/
 
 .DS_Store/
 .idea/

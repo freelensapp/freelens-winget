@@ -7,7 +7,7 @@ on:
       - renovate/*
   pull_request:
     branches:
-      - updates
+      - main
   workflow_dispatch: {}
 
 permissions:
